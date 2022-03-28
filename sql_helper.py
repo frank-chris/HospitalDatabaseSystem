@@ -1,5 +1,13 @@
 import MySQLdb.cursors
 
+def convert(raw_out, type):
+    res = []
+
+    if type == "show":
+        for t in raw_out:
+            res.append(t[0])
+    return res
+
 def list_to_string(list):
     corr_str = " ".join(str(x) for x in list)
     corr_str = "(" + corr_str + ")"
@@ -9,6 +17,7 @@ def show_tables(mysql):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SHOW TABLES")
     res = cursor.fetchall()
+    res = convert(res, "show")
     return res
 
 def desc_table(mysql, tablename):
