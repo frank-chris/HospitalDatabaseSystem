@@ -65,23 +65,42 @@
   <!-- hero -->
   <div class="hero min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row gap-8">
-      <div class="flex-col w-3/5">
-        <img src="{{url_for('static', filename='hero_img.svg')}}" class="w-full" />
-        <a class="link link-hover" href="https://storyset.com/work">Work illustrations by Storyset</a>
+      <div class="card w-80 h-160 bg-base-100 shadow-xl">
+        <figure><img class="p-8" src="{{url_for('static', filename='update.svg')}}" alt="update" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">Update</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Update</button>
+          </div>
+        </div>
       </div>
-      <div>
-        <h1 class="text-5xl font-bold">Hospital Database System</h1>
-        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-        
-        <form method="post" enctype="multipart/form-data" >
-          <button name="start" value="start" class="btn btn-primary">Get Started</button>
-        </form>
+
+      <div class="card w-80 h-160 bg-base-100 shadow-xl">
+        <figure><img class="p-8" src="{{url_for('static', filename='insert.svg')}}" alt="insert" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">Insert</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Insert</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card w-80 h-160 bg-base-100 shadow-xl">
+        <figure><img class="p-8" src="{{url_for('static', filename='delete.svg')}}" alt="delete" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">Delete</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Delete</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- footer -->
-
   <footer class="footer p-10 bg-base-200 text-base-content">
     <div>
       <h1 class="text-xl font-bold">Hospital Database System</h1>
