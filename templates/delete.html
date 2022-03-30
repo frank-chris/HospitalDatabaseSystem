@@ -31,6 +31,9 @@
             <li>
               <a href="delete" class="ghost-btn rounded-lg">Delete</a>
             </li>
+            <li>
+              <a href="display" class="ghost-btn rounded-lg">Display</a>
+            </li>
           </ul>
         </div>
       </div> 
@@ -51,6 +54,9 @@
             <li>
               <a href="delete" >Delete</a>
             </li>
+            <li>
+              <a href="display" >Display</a>
+            </li>
           </ul>
         </div>
         <!-- <button class="btn btn-square btn-ghost">
@@ -66,9 +72,9 @@
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
     <h1 class="font-bold text-3xl pl-4"> Deletion</h1>
     <div class="hero-content flex-col lg:flex-row-reverse gap-16">
-      <div class="flex-col w-full">
+      <div class="flex-col w-2/3">
         <h1 class="font-bold text-xl p-2">{{ table_name }}</h1>
-        <div class="card overflow-x-auto w-full overflow-y-auto h-96 shadow-xl">
+        <div class="card overflow-x-auto w-full overflow-y-auto max-h-96 shadow-xl">
           <table class="table w-full">
             {{ table|safe  }}
           </table>

@@ -110,5 +110,17 @@ def delete():
     table = nested_list_to_html_table(show_tables(mysql))
     return render_template('delete.html', table=table, table_name=table_name)
 
+@app.route('/display', methods=['POST', 'GET'])
+def display():
+    table_name = ''
+    if request.method == 'POST' and 'table' in request.form:
+        if 'display' in request.form:
+            table_name = request.form['table']
+            table = nested_list_to_html_table(select_with_headers(mysql, table_name))
+            return render_template('display.html', table=table, table_name=table_name)
+
+    table = nested_list_to_html_table(show_tables(mysql))
+    return render_template('display.html', table=table, table_name=table_name)
+
 if __name__ == '__main__':
     app.run()
