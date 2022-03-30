@@ -57,8 +57,8 @@ def insert():
             values = request.form['values']
             try:
                 tables = insert_to_table(mysql, table_name, columns.split(','), values.split(','))
-            except:
-                return render_template('invalid.html')
+            except Exception as e:
+                return render_template('invalid.html', e=str(e.args[1]))
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('insert_results.html', tables=tables, table_name=table_name)
 
@@ -80,8 +80,8 @@ def update():
             where = request.form['where']
             try:
                 tables = update_table(mysql, table_name, column, value, where)
-            except:
-                return render_template('invalid.html')
+            except Exception as e:
+                return render_template('invalid.html', e=str(e.args[1]))
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('update_results.html', tables=tables, table_name=table_name)
 
@@ -101,8 +101,8 @@ def delete():
             where = request.form['where']
             try:
                 tables = delete_from_table(mysql, table_name, where)
-            except:
-                return render_template('invalid.html')
+            except Exception as e:
+                return render_template('invalid.html', e=str(e.args[1]))
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('delete_results.html', tables=tables, table_name=table_name)
 

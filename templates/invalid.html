@@ -69,9 +69,9 @@
         <img src="{{url_for('static', filename='hero_img.svg')}}" class="w-4/5" />
       </div>
       <div>
-        <h1 class="text-5xl font-bold">Invalid Input</h1>
-        <p class="py-6">Please make sure text values are in quotes.</p>
-        
+        <h1 class="text-5xl font-bold">MySQL Exception</h1>
+        <p class="pt-6 font-bold">{{ e }}</p>
+        <p class="pt-3 pb-6">Also, please make sure text values are in quotes and that there are no spaces.</p>
         <a href="commands" name="insert_commands" class="btn btn-primary mr-2" >Back to commands</a>
       </div>
     </div>
