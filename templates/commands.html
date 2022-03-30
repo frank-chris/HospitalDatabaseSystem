@@ -109,6 +109,19 @@
           </div>
         </div>
       </div>
+
+      <div class="card w-80 h-160 bg-base-100 shadow-xl">
+        <figure><img class="p-8" src="{{url_for('static', filename='display.svg')}}" alt="display" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">Display</h2>
+          <p>Display a table from the <br> database.</p>
+          <div class="card-actions justify-end">
+            <form method="post" enctype="multipart/form-data" >
+              <button name="display" value="display" class="btn btn-primary"  href="/display">Display</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -40,6 +40,8 @@ def choose_command():
         return redirect(url_for('update'))
     elif request.form.get("delete"):
         return redirect(url_for('delete'))
+    elif request.form.get("display"):
+        return redirect(url_for('display'))
     else:
         return render_template('commands.html')
 
