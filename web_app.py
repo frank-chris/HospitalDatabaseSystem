@@ -12,7 +12,7 @@ app.secret_key = 'mango'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'tempuser'
 app.config['MYSQL_PASSWORD'] = '123+Temppass'
-app.config['MYSQL_DB'] = 'graduation'
+app.config['MYSQL_DB'] = 'hospitaldb'
 
 # Intialize MySQL
 mysql = MySQL(app)
