@@ -1,7 +1,4 @@
 import MySQLdb.cursors
-from numpy import where
-
-
 
 def convert(raw_out, type):
     '''
@@ -83,7 +80,6 @@ def desc_table(mysql, tablename):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("DESC " + tablename)
     res = cursor.fetchall()
-    print(res)
     res = convert(res, "desc")
     return res
 
@@ -135,7 +131,6 @@ def update_table(mysql, tablename, column, val,  where_condition):
     '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    print("UPDATE " + tablename +" SET " + column + " = " + val + " WHERE " + where_condition)
     cursor.execute("UPDATE " + tablename +" SET " + column + " = " + val + " WHERE " + where_condition)
     mysql.connection.commit()
     cursor.fetchall()

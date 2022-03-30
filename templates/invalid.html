@@ -64,33 +64,16 @@
 
   <!-- hero -->
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
-    <div class="flex-col">
-      <div class="form-control">
-        <div class="flex-row gap-2 pl-4">
-          <a href="commands" name="insert_commands" class="btn btn-primary mr-2" >Back to commands</a>
-        </div>
+    <div class="hero-content flex-col lg:flex-row gap-8">
+      <div class="flex-col w-3/5">
+        <img src="{{url_for('static', filename='hero_img.svg')}}" class="w-4/5" />
       </div>
-    </div>
-    <div class="hero-content flex-col lg:flex-row gap-16">
+      <div>
+        <h1 class="text-5xl font-bold">Invalid Input</h1>
+        <p class="py-6">Please make sure text values are in quotes.</p>
         
-        <div class="flex-col w-full">
-            <h1 class="font-bold text-xl p-2">Before Insertion</h1>
-            <div class="card overflow-x-auto w-full shadow-xl">
-                <table class="table w-full">
-                {{ tables[0]|safe  }}
-                </table>
-            </div>
-        </div>
-
-        <div class="flex-col w-full">
-            <h1 class="font-bold text-xl p-2">After Insertion</h1>
-            <div class="card overflow-x-auto w-full shadow-xl">
-                <table class="table w-full">
-                {{ tables[1]|safe  }}
-                </table>
-            </div>
-        </div>
-
+        <a href="commands" name="insert_commands" class="btn btn-primary mr-2" >Back to commands</a>
+      </div>
     </div>
   </div>
 

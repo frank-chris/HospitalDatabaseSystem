@@ -54,7 +54,10 @@ def insert():
             table_name = request.form['table']
             columns = request.form['columns']
             values = request.form['values']
-            tables = insert_to_table(mysql, table_name, columns.split(','), values.split(','))
+            try:
+                tables = insert_to_table(mysql, table_name, columns.split(','), values.split(','))
+            except:
+                return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('insert_results.html', tables=tables)
 
@@ -73,7 +76,10 @@ def update():
             column = request.form['column']
             value = request.form['value']
             where = request.form['where']
-            tables = update_table(mysql, table_name, column, value, where)
+            try:
+                tables = update_table(mysql, table_name, column, value, where)
+            except:
+                return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('update_results.html', tables=tables)
 
@@ -90,7 +96,10 @@ def delete():
         elif 'delete_execute' in request.form and 'where' in request.form:
             table_name = request.form['table']
             where = request.form['where']
-            tables = delete_from_table(mysql, table_name, where)
+            try:
+                tables = delete_from_table(mysql, table_name, where)
+            except:
+                return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
             return render_template('delete_results.html', tables=tables)
 
