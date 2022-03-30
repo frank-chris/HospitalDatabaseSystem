@@ -61,9 +61,24 @@ def insert():
     table = nested_list_to_html_table(show_tables(mysql))
     return render_template('insert.html', table=table)
 
-@app.route('/update')
+@app.route('/update', methods=['POST', 'GET'])
 def update():
-    return render_template('update.html')
+    if request.method == 'POST' and 'table' in request.form:
+        if 'update_describe' in request.form:
+            table_name = request.form['table']
+            table = nested_list_to_html_table(desc_table(mysql, table_name))
+            return render_template('update.html', table=table)
+        elif 'update_execute' in request.form and 'column' in request.form and 'value' in request.form and 'where' in request.form:
+            table_name = request.form['table']
+            column = request.form['column']
+            value = request.form['value']
+            where = request.form['where']
+            tables = update_table(mysql, table_name, column, value, where)
+            tables = [nested_list_to_html_table(t) for t in tables]
+            return render_template('update_results.html', tables=tables)
+
+    table = nested_list_to_html_table(show_tables(mysql))
+    return render_template('update.html', table=table)
 
 @app.route('/delete')
 def delete():
