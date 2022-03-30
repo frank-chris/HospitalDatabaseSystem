@@ -64,33 +64,40 @@
 
   <!-- hero -->
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
-    <div class="flex-col">
-      <div class="form-control">
-        <div class="flex-row gap-2 pl-4">
-          <a href="commands" name="insert_commands" class="btn btn-primary mr-2" >Back to commands</a>
-        </div>
+    <div class="hero-content flex-col lg:flex-row-reverse gap-16">
+      <div class="card overflow-x-auto w-full shadow-xl">
+        <table class="table w-full">
+          {{ table|safe  }}
+        </table>
       </div>
-    </div>
-    <div class="hero-content flex-col lg:flex-row gap-16">
-        
-        <div class="flex-col w-full">
-            <h1 class="font-bold text-xl p-2">Before Updation</h1>
-            <div class="card overflow-x-auto w-full shadow-xl">
-                <table class="table w-full">
-                {{ tables[0]|safe  }}
-                </table>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
+        <form class="card-body" enctype="multipart/form-data" method="post">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Table</span>
+            </label>
+            <input type="text" name="table" placeholder="Table to delete from" class="input input-bordered" required>
+          </div>
+          <div class="form-control mt-2">
+            <div class="flex-row gap-2">
+              <button name="delete_describe" class="btn btn-primary" >Describe Table</button>
             </div>
-        </div>
+          </div>
+          
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Where Condition</span>
+            </label>
+            <input type="text" name="where" placeholder="WHERE condition" class="input input-bordered">
+          </div>
 
-        <div class="flex-col w-full">
-            <h1 class="font-bold text-xl p-2">After Updation</h1>
-            <div class="card overflow-x-auto w-full shadow-xl">
-                <table class="table w-full">
-                {{ tables[1]|safe  }}
-                </table>
+          <div class="form-control mt-2">
+            <div class="flex-row gap-2">
+              <button name="delete_execute" class="btn btn-primary mr-2" >Execute</button>
             </div>
-        </div>
-
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 

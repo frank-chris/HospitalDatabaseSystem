@@ -1,4 +1,5 @@
 import MySQLdb.cursors
+from numpy import where
 
 
 
@@ -17,12 +18,12 @@ def convert(raw_out, type):
     res = []
 
     if type == "col_names":
-        res.append(['Columns'])
+        res.append(['Columns in the table'])
         for col_name in raw_out:
             res.append([col_name['COLUMN_NAME']])
 
     if type == "show":
-        res.append(['Tables'])
+        res.append(['Tables in the database'])
         for t in raw_out:
             res.append(list(t.values()))
 
@@ -116,13 +117,14 @@ def insert_to_table(mysql, tablename, columnlist, val_list):
     
     return res1, res2
 
-def delete(mysql, tablename, where_condition):
+def delete_from_table(mysql, tablename, where_condition):
     '''
     where_condition: entire where condition, including ANDs and ORs, as a string
     '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("DELETE FROM %s WHERE %s", (tablename, where_condition))
+    cursor.execute("DELETE FROM " + tablename + " WHERE " + where_condition)
+    mysql.connection.commit()
     cursor.fetchall()
     res2 = select_with_headers(mysql, tablename) # after the operation
     return res1, res2
