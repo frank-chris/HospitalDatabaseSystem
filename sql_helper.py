@@ -3,6 +3,17 @@ import MySQLdb.cursors
 
 
 def convert(raw_out, type):
+    '''
+    Converts the format returned by cursor.fetchall() to something more palatable for the user
+
+    input
+    raw_out: unprocessed output of cursor.fetchall()
+    type: type of sql command used
+
+    Return
+    res: Format specified (by Chris) for web app
+    '''
+
     res = []
 
     if type == "col_names":
@@ -32,6 +43,9 @@ def convert(raw_out, type):
     return res
 
 def col_names(mysql, tablename, db_name="hospitalDB"):
+    '''
+    Obtains the names of all columns of the table as a list
+    '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS`  WHERE `TABLE_SCHEMA`='%s' and `TABLE_NAME`='%s'", db_name, tablename)
     res = cursor.fetchall()
@@ -39,11 +53,25 @@ def col_names(mysql, tablename, db_name="hospitalDB"):
     return res
 
 def list_to_string(list):
+    '''
+    Converts list to string, surrounded by round brackets. Helper for insert.
+    '''
     corr_str = " ".join(str(x) for x in list)
     corr_str = "(" + corr_str + ")"
     return corr_str
 
+def use_database(mysql, db_name='hospitalDB'):
+    '''
+    Selects database
+    '''
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("USE %s", db_name)
+    cursor.fetchall()
+
 def show_tables(mysql):
+    '''
+    Shows all tables of the given database
+    '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SHOW TABLES")
     res = cursor.fetchall()
@@ -52,7 +80,8 @@ def show_tables(mysql):
 
 def desc_table(mysql, tablename):
     '''
-    return: list of dictionaries -> (Field (or col_name), Type (dtype), Null (allowed or not), Key, Default, Extra)
+    Return
+    List of dictionaries: (Field (or col_name), Type (dtype), Null (allowed or not), Key, Default, Extra)
     '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("DESC %s", (tablename, ))
@@ -61,6 +90,10 @@ def desc_table(mysql, tablename):
     return res
 
 def select_with_headers(mysql, tablename):
+    '''
+    Return
+    List of lists: First is list of column names, followed by list of rows
+    '''
     column_names = col_names(mysql, tablename)
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("SELECT * FROM %s", (tablename))
@@ -70,6 +103,12 @@ def select_with_headers(mysql, tablename):
     return res
 
 def insert(mysql, tablename, columnlist, val_list):
+    '''
+    Inserts a row into the specified table
+
+    columnlist: List of columns of the table
+    val_list: List of corresponding values to be inserted
+    '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cols_string = list_to_string(columnlist)
@@ -81,6 +120,9 @@ def insert(mysql, tablename, columnlist, val_list):
     return res1, res2
 
 def delete(mysql, tablename, where_condition):
+    '''
+    where_condition: entire where condition, including ANDs and ORs, as a string
+    '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("DELETE FROM %s WHERE %s", (tablename, where_condition))
@@ -89,11 +131,11 @@ def delete(mysql, tablename, where_condition):
     return res1, res2
 
 def update(mysql, tablename, column, val,  where_condition):
+    '''
+    where_condition: entire where condition, including ANDs and ORs, as a string
+    '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute("UPDATE %s SET %s = %s WHERE %s", (tablename, column, val, where_condition))
     cursor.fetchall()
     res2 = select_with_headers(mysql, tablename) # after the operation
-
-
-print(list_to_string([1, 2, 3]))
