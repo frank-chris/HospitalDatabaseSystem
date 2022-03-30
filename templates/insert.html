@@ -63,50 +63,61 @@
 
 
   <!-- hero -->
-  <div class="hero min-h-screen bg-base-100">
-    <div class="hero-content flex-col lg:flex-row gap-8">
-      <div class="card w-80 h-160 bg-base-100 shadow-xl">
-        <figure><img class="p-8" src="{{url_for('static', filename='update.svg')}}" alt="update" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">Update</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <form method="post" enctype="multipart/form-data" >
-              <button name="update" value="update" class="btn btn-primary" href="/update">Update</button>
-            </form>
-          </div>
-        </div>
+  <div class="min-h-screen bg-base-100 p-16 lg:p-32">
+    <div class="hero-content flex-col lg:flex-row-reverse gap-16">
+      <div class="card overflow-x-auto w-full shadow-xl">
+        <table class="table w-full">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            <tr>
+              <th>1</th>
+              <td>Cy Ganderton</td>
+            </tr>
+            <!-- row 2 -->
+            <tr>
+              <th>2</th>
+              <td>Hart Hagerty</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="card w-80 h-160 bg-base-100 shadow-xl">
-        <figure><img class="p-8" src="{{url_for('static', filename='insert.svg')}}" alt="insert" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">Insert</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <form method="post" enctype="multipart/form-data" >
-              <button name="insert" value="insert" class="btn btn-primary"  href="/insert">Insert</button>
-            </form>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
+        <form class="card-body" enctype="multipart/form-data" method="post">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Table</span>
+            </label>
+            <input type="text" name="table" placeholder="Table to insert into" class="input input-bordered" required>
           </div>
-        </div>
-      </div>
-
-      <div class="card w-80 h-160 bg-base-100 shadow-xl">
-        <figure><img class="p-8" src="{{url_for('static', filename='delete.svg')}}" alt="delete" /></figure>
-        <div class="card-body">
-          <h2 class="card-title">Delete</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <form method="post" enctype="multipart/form-data" >
-              <button name="delete" value="delete" class="btn btn-primary"  href="/delete">Delete</button>
-            </form>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Columns</span>
+            </label>
+            <input type="text" name="columns" placeholder="Column names (comma separated)" class="input input-bordered" required>
           </div>
-        </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Values</span>
+            </label>
+            <input type="text" name="values" placeholder="Values (comma separated)" class="input input-bordered" required>
+          </div>
+          <div class="form-control mt-6">
+            <button name="insert_execute" class="btn btn-primary" >Execute</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
   <!-- footer -->
+
   <footer class="footer p-10 bg-base-200 text-base-content">
     <div>
       <h1 class="text-xl font-bold">Hospital Database System</h1>

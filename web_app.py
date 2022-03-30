@@ -31,5 +31,28 @@ def choose():
 def commands():
     return render_template('commands.html')
 
+@app.route('/commands', methods=['POST'])
+def choose_command():
+    if request.form.get("insert"):
+        return redirect(url_for('insert'))
+    elif request.form.get("update"):
+        return redirect(url_for('update'))
+    elif request.form.get("delete"):
+        return redirect(url_for('delete'))
+    else:
+        return render_template('commands.html')
+
+@app.route('/insert')
+def insert():
+    return render_template('insert.html')
+
+@app.route('/update')
+def update():
+    return render_template('update.html')
+
+@app.route('/delete')
+def delete():
+    return render_template('delete.html')
+
 if __name__ == '__main__':
     app.run()
