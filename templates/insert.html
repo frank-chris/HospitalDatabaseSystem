@@ -63,18 +63,54 @@
 
 
   <!-- hero -->
-  <div class="hero min-h-screen bg-base-100">
-    <div class="hero-content flex-col lg:flex-row gap-8">
-      <div class="flex-col w-3/5">
-        <img src="{{url_for('static', filename='hero_img.svg')}}" class="w-full" />
-        <a class="link link-hover" href="https://storyset.com/work">Work illustrations by Storyset</a>
+  <div class="min-h-screen bg-base-100 p-16 lg:p-32">
+    <div class="hero-content flex-col lg:flex-row-reverse gap-16">
+      <div class="card overflow-x-auto w-full shadow-xl">
+        <table class="table w-full">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            <tr>
+              <th>1</th>
+              <td>Cy Ganderton</td>
+            </tr>
+            <!-- row 2 -->
+            <tr>
+              <th>2</th>
+              <td>Hart Hagerty</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div>
-        <h1 class="text-5xl font-bold">Hospital Database System</h1>
-        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-        
-        <form method="post" enctype="multipart/form-data" >
-          <button name="start" value="start" class="btn btn-primary">Get Started</button>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
+        <form class="card-body" enctype="multipart/form-data" method="post">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Table</span>
+            </label>
+            <input type="text" name="table" placeholder="Table to insert into" class="input input-bordered" required>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Columns</span>
+            </label>
+            <input type="text" name="columns" placeholder="Column names (comma separated)" class="input input-bordered" required>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Values</span>
+            </label>
+            <input type="text" name="values" placeholder="Values (comma separated)" class="input input-bordered" required>
+          </div>
+          <div class="form-control mt-6">
+            <button name="insert_execute" class="btn btn-primary" >Execute</button>
+          </div>
         </form>
       </div>
     </div>
