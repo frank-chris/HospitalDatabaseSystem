@@ -17,28 +17,24 @@ def convert(raw_out, type):
     res = []
 
     if type == "col_names":
+        res.append(['Columns'])
         for col_name in raw_out:
-            res.append(col_name[0])
+            res.append([col_name['COLUMN_NAME']])
 
     if type == "show":
+        res.append(['Tables'])
         for t in raw_out:
-            res.append(t[0])
+            res.append(list(t.values()))
 
     if type == "desc":
+        res.append(list(raw_out[0].keys()))
         for t in raw_out:
-            row = dict()
-            row['Field'] = t[0]
-            row['Type'] = t[1]
-            row['Null'] = t[2]
-            row['Key'] = t[3]
-            row['Default'] = t[4]
-            row['Extra'] = t[5]
-            res.append(row)
+            res.append(list(t.values()))
 
     if type == "select":
+        res.append(list(raw_out[0].keys()))
         for t in raw_out:
-            row = list(t)
-            res.append(row)
+            res.append(list(t.values()))
 
     return res
 
@@ -47,7 +43,7 @@ def col_names(mysql, tablename, db_name="hospitalDB"):
     Obtains the names of all columns of the table as a list
     '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT `COLUMN_NAME`  FROM `INFORMATION_SCHEMA`.`COLUMNS`  WHERE `TABLE_SCHEMA`='%s' and `TABLE_NAME`='%s'", db_name, tablename)
+    cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=%s and TABLE_NAME=%s", (db_name, tablename,))
     res = cursor.fetchall()
     res = convert(res, "col_names")
     return res
@@ -56,7 +52,7 @@ def list_to_string(list):
     '''
     Converts list to string, surrounded by round brackets. Helper for insert.
     '''
-    corr_str = " ".join(str(x) for x in list)
+    corr_str = ",".join(str(x) for x in list)
     corr_str = "(" + corr_str + ")"
     return corr_str
 
@@ -84,8 +80,9 @@ def desc_table(mysql, tablename):
     List of dictionaries: (Field (or col_name), Type (dtype), Null (allowed or not), Key, Default, Extra)
     '''
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("DESC %s", (tablename, ))
+    cursor.execute("DESC " + tablename)
     res = cursor.fetchall()
+    print(res)
     res = convert(res, "desc")
     return res
 
@@ -94,15 +91,14 @@ def select_with_headers(mysql, tablename):
     Return
     List of lists: First is list of column names, followed by list of rows
     '''
-    column_names = col_names(mysql, tablename)
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT * FROM %s", (tablename))
+    cursor.execute("SELECT * FROM " + tablename)
     rows = cursor.fetchall()
     rows = convert(rows, "select")
-    res = [column_names] + rows # error prone
+    res = rows # error prone
     return res
 
-def insert(mysql, tablename, columnlist, val_list):
+def insert_to_table(mysql, tablename, columnlist, val_list):
     '''
     Inserts a row into the specified table
 
@@ -113,7 +109,8 @@ def insert(mysql, tablename, columnlist, val_list):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cols_string = list_to_string(columnlist)
     vals_string = list_to_string(val_list)
-    cursor.execute("INSERT INTO %s %s VALUES %s", (tablename, cols_string, vals_string))
+    cursor.execute("INSERT INTO " + tablename + " " + cols_string + " VALUES " + vals_string)
+    mysql.connection.commit()
     cursor.fetchall()
     res2 = select_with_headers(mysql, tablename) # after the operation
     

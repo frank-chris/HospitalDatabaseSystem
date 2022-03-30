@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
-import MySQLdb.cursors
+from sql_helper import *
+from table import nested_list_to_html_table
 
 app = Flask(__name__)
 app.debug = True
@@ -42,9 +43,23 @@ def choose_command():
     else:
         return render_template('commands.html')
 
-@app.route('/insert')
+@app.route('/insert', methods=['POST', 'GET'])
 def insert():
-    return render_template('insert.html')
+    if request.method == 'POST' and 'table' in request.form:
+        if 'insert_describe' in request.form:
+            table_name = request.form['table']
+            table = nested_list_to_html_table(desc_table(mysql, table_name))
+            return render_template('insert.html', table=table)
+        elif 'insert_execute' in request.form and 'columns' in request.form and 'values' in request.form:
+            table_name = request.form['table']
+            columns = request.form['columns']
+            values = request.form['values']
+            tables = insert_to_table(mysql, table_name, columns.split(','), values.split(','))
+            tables = [nested_list_to_html_table(t) for t in tables]
+            return render_template('insert_results.html', tables=tables)
+
+    table = nested_list_to_html_table(show_tables(mysql))
+    return render_template('insert.html', table=table)
 
 @app.route('/update')
 def update():
