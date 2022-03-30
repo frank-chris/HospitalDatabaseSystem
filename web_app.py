@@ -45,11 +45,12 @@ def choose_command():
 
 @app.route('/insert', methods=['POST', 'GET'])
 def insert():
+    table_name = ''
     if request.method == 'POST' and 'table' in request.form:
         if 'insert_describe' in request.form:
             table_name = request.form['table']
             table = nested_list_to_html_table(desc_table(mysql, table_name))
-            return render_template('insert.html', table=table)
+            return render_template('insert.html', table=table, table_name=table_name)
         elif 'insert_execute' in request.form and 'columns' in request.form and 'values' in request.form:
             table_name = request.form['table']
             columns = request.form['columns']
@@ -59,18 +60,19 @@ def insert():
             except:
                 return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
-            return render_template('insert_results.html', tables=tables)
+            return render_template('insert_results.html', tables=tables, table_name=table_name)
 
     table = nested_list_to_html_table(show_tables(mysql))
-    return render_template('insert.html', table=table)
+    return render_template('insert.html', table=table, table_name=table_name)
 
 @app.route('/update', methods=['POST', 'GET'])
 def update():
+    table_name = ''
     if request.method == 'POST' and 'table' in request.form:
         if 'update_describe' in request.form:
             table_name = request.form['table']
             table = nested_list_to_html_table(desc_table(mysql, table_name))
-            return render_template('update.html', table=table)
+            return render_template('update.html', table=table, table_name=table_name)
         elif 'update_execute' in request.form and 'column' in request.form and 'value' in request.form and 'where' in request.form:
             table_name = request.form['table']
             column = request.form['column']
@@ -81,18 +83,19 @@ def update():
             except:
                 return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
-            return render_template('update_results.html', tables=tables)
+            return render_template('update_results.html', tables=tables, table_name=table_name)
 
     table = nested_list_to_html_table(show_tables(mysql))
-    return render_template('update.html', table=table)
+    return render_template('update.html', table=table, table_name=table_name)
 
 @app.route('/delete', methods=['POST', 'GET'])
 def delete():
+    table_name = ''
     if request.method == 'POST' and 'table' in request.form:
         if 'delete_describe' in request.form:
             table_name = request.form['table']
             table = nested_list_to_html_table(desc_table(mysql, table_name))
-            return render_template('delete.html', table=table)
+            return render_template('delete.html', table=table, table_name=table_name)
         elif 'delete_execute' in request.form and 'where' in request.form:
             table_name = request.form['table']
             where = request.form['where']
@@ -101,11 +104,11 @@ def delete():
             except:
                 return render_template('invalid.html')
             tables = [nested_list_to_html_table(t) for t in tables]
-            return render_template('delete_results.html', tables=tables)
+            return render_template('delete_results.html', tables=tables, table_name=table_name)
 
 
     table = nested_list_to_html_table(show_tables(mysql))
-    return render_template('delete.html', table=table)
+    return render_template('delete.html', table=table, table_name=table_name)
 
 if __name__ == '__main__':
     app.run()

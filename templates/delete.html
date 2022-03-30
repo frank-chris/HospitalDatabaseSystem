@@ -66,10 +66,13 @@
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
     <h1 class="font-bold text-3xl pl-4"> Deletion</h1>
     <div class="hero-content flex-col lg:flex-row-reverse gap-16">
-      <div class="card overflow-x-auto w-full shadow-xl">
-        <table class="table w-full">
-          {{ table|safe  }}
-        </table>
+      <div class="flex-col w-full">
+        <h1 class="font-bold text-xl p-2">{{ table_name }}</h1>
+        <div class="card overflow-x-auto w-full shadow-xl">
+          <table class="table w-full">
+            {{ table|safe  }}
+          </table>
+        </div>
       </div>
       <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
         <form class="card-body" enctype="multipart/form-data" method="post">
