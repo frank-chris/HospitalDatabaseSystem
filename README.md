@@ -1,15 +1,71 @@
-# HospitalDatabaseSystem
+# HospitalDatabaseSystem 🏥
 A Flask web application for a hospital database system. CS 432: Databases assignment, IIT Gandhinagar.
 
-# Requirements
-1) MySQLdb
-2) Flask
-3) flask_mysqldb
+# Requirements ⚡
+1) MySQL
+2) Python 3
+3) MySQLdb
+4) Flask
+5) Flask-MySQLdb
 
-# Explanation to run the Project
+# Instructions to run the web app ⏩
+
 ## Install the following packages
-1) pip install mysqlclient/ apt-get install python3-mysqldb
-2) pip install Flask
-3) pip install flask-mysqldb
+```
+pip install mysqlclient/ apt-get install python3-mysqldb
+```
+```
+pip install Flask
+```
+```
+pip install Flask-MySQLdb
+```
 
-# Examples for each command
+## Import hospitalDB.sql (dump file) to MySQL as a database named hospitalDB
+
+```
+mysql -u tempuser -p hospitalDB < hospitalDB.sql
+```
+
+## Create a MySQL user as follows
+
+```
+CREATE USER 'tempuser'@'localhost' IDENTIFIED BY '123+Temppass';
+```
+
+## Grant permission to the account
+
+```
+GRANT ALL PRIVILEGES ON hospitalDB.* TO 'tempuser'@'localhost';
+```
+
+## Run the web app
+
+```
+python3 web_app.py
+```
+
+# Examples for each command ⭐
+
+
+# Contributors ✏️
+
+### TEAM G1
+
+* Amey Kulkarni (18110016)
+
+* Chris Francis (18110041)
+
+* Eshan Gujarathi (19110082)
+
+* Hitarth Gandhi (19110087)
+
+### TEAM G2
+
+* Hrushti Naik (19110088)
+
+* Shril Mody (18110162)
+
+* Viraj Shah (18110188)
+
+* Vishal Soni (19110207)
