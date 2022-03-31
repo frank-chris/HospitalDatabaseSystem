@@ -72,8 +72,11 @@ python3 web_app.py
 ## Insert Successful
 ![](images/insert_successful.png)
 
-## Update Entry
+## Pick entry for updation
 ![](images/update_table.png)
+
+## Update Entry
+![](images/update_entry.png)
 
 ## Update Successful
 ![](images/update_successful.png)
