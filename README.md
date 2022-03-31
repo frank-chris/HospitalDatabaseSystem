@@ -47,6 +47,11 @@ python3 web_app.py
 
 # Examples for each command ⭐
 
+## Home Page
+![](images/homepage.png)
+
+## Pick Table
+![](images/pick_table.png)
 
 # Contributors ✏️
 
