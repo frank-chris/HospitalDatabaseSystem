@@ -1,6 +1,13 @@
-# HospitalDatabaseSystem 🏥
-A Flask web application for a hospital database system. CS 432: Databases assignment, IIT Gandhinagar.
+# Hospital Database System 🏥
+A Flask web application for a hospital database system. 
+CS 432: Databases assignment, IIT Gandhinagar.
 
+# Files 📁
+
+* [`contributions.txt`](https://github.com/frank-chris/HospitalDatabaseSystem/blob/main/contributions.txt)    
+* [`hospitalDB.sql`](https://github.com/frank-chris/HospitalDatabaseSystem/blob/main/hospitalDB.sql)   
+* [`README.pdf`](https://github.com/frank-chris/HospitalDatabaseSystem/blob/main/README.pdf)   
+  
 # Requirements ⚡
 1) MySQL
 2) Python 3

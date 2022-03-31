@@ -27,8 +27,8 @@ CREATE TABLE `allot` (
   `room_no` int DEFAULT NULL,
   PRIMARY KEY (`equipment_id`),
   KEY `room_no` (`room_no`),
-  CONSTRAINT `allot_ibfk_1` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`equipment_id`),
-  CONSTRAINT `allot_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`)
+  CONSTRAINT `allot_ibfk_1` FOREIGN KEY (`equipment_id`) REFERENCES `equipment` (`equipment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `allot_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -83,7 +83,7 @@ CREATE TABLE `ambulance_services` (
   `amb_id` int DEFAULT NULL,
   PRIMARY KEY (`emp_id`,`patient_id`,`date_of_admittance`),
   KEY `patient_id` (`patient_id`,`date_of_admittance`),
-  CONSTRAINT `ambulance_services_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `ambulance_services_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,9 +115,9 @@ CREATE TABLE `appointment` (
   UNIQUE KEY `appointment_id` (`appointment_id`),
   KEY `rec_emp_id` (`rec_emp_id`),
   KEY `patient_id` (`patient_id`,`date_of_admittance`),
-  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctor_emp_id`) REFERENCES `doctor` (`emp_id`),
-  CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`rec_emp_id`) REFERENCES `receptionist` (`emp_id`),
-  CONSTRAINT `appointment_ibfk_3` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctor_emp_id`) REFERENCES `doctor` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`rec_emp_id`) REFERENCES `receptionist` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `appointment_ibfk_3` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -142,7 +142,7 @@ CREATE TABLE `cashier` (
   `emp_id` int NOT NULL,
   `counter_no` int NOT NULL,
   PRIMARY KEY (`emp_id`),
-  CONSTRAINT `cashier_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `cashier_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -192,7 +192,7 @@ CREATE TABLE `department_floor` (
   `dept_name` varchar(512) NOT NULL,
   `floor` int NOT NULL,
   PRIMARY KEY (`dept_name`,`floor`),
-  CONSTRAINT `department_floor_ibfk_1` FOREIGN KEY (`dept_name`) REFERENCES `department` (`dept_name`)
+  CONSTRAINT `department_floor_ibfk_1` FOREIGN KEY (`dept_name`) REFERENCES `department` (`dept_name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -218,8 +218,8 @@ CREATE TABLE `doc_dept` (
   `dept_name` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
   KEY `dept_name` (`dept_name`),
-  CONSTRAINT `doc_dept_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `doctor` (`emp_id`),
-  CONSTRAINT `doc_dept_ibfk_2` FOREIGN KEY (`dept_name`) REFERENCES `department` (`dept_name`)
+  CONSTRAINT `doc_dept_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `doctor` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `doc_dept_ibfk_2` FOREIGN KEY (`dept_name`) REFERENCES `department` (`dept_name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -229,7 +229,7 @@ CREATE TABLE `doc_dept` (
 
 LOCK TABLES `doc_dept` WRITE;
 /*!40000 ALTER TABLE `doc_dept` DISABLE KEYS */;
-INSERT INTO `doc_dept` VALUES (207,'OPD'),(209,'OPD'),(210,'OPD'),(212,'OPD'),(205,'OT Complex'),(206,'OT Complex'),(211,'OT Complex'),(208,'Paramedical'),(213,'Radiology'),(214,'Radiology');
+INSERT INTO `doc_dept` VALUES (207,'OPD'),(209,'OPD'),(210,'OPD'),(212,'OPD'),(206,'OT Complex'),(211,'OT Complex'),(208,'Paramedical'),(213,'Radiology'),(214,'Radiology');
 /*!40000 ALTER TABLE `doc_dept` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,8 +245,8 @@ CREATE TABLE `doc_offices` (
   `office_no` int DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
   KEY `office_no` (`office_no`),
-  CONSTRAINT `doc_offices_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `doctor` (`emp_id`),
-  CONSTRAINT `doc_offices_ibfk_2` FOREIGN KEY (`office_no`) REFERENCES `office` (`office_no`)
+  CONSTRAINT `doc_offices_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `doctor` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `doc_offices_ibfk_2` FOREIGN KEY (`office_no`) REFERENCES `office` (`office_no`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -256,7 +256,7 @@ CREATE TABLE `doc_offices` (
 
 LOCK TABLES `doc_offices` WRITE;
 /*!40000 ALTER TABLE `doc_offices` DISABLE KEYS */;
-INSERT INTO `doc_offices` VALUES (205,101),(206,102),(207,103),(208,104),(209,201),(210,202),(211,203),(212,204),(213,205),(214,206);
+INSERT INTO `doc_offices` VALUES (206,102),(207,103),(208,104),(209,201),(210,202),(211,203),(212,204),(213,205),(214,206);
 /*!40000 ALTER TABLE `doc_offices` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +271,7 @@ CREATE TABLE `doctor` (
   `emp_id` int NOT NULL,
   `specialization` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
-  CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -281,7 +281,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (205,'Anesthesiologist'),(206,'Anesthesiologist'),(207,'Dermatologist'),(208,'Endocrinologist'),(209,'Family Physician'),(210,'Family Physician'),(211,'Neurologist'),(212,'Pediatrician'),(213,'Radiologist'),(214,'Radiologist');
+INSERT INTO `doctor` VALUES (206,'Anesthesiologist'),(207,'Dermatologist'),(208,'Endocrinologist'),(209,'Family Physician'),(210,'Family Physician'),(211,'Neurologist'),(212,'Pediatrician'),(213,'Radiologist'),(214,'Radiologist');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +296,7 @@ CREATE TABLE `driver` (
   `emp_id` int NOT NULL,
   `license_no` varchar(128) NOT NULL,
   PRIMARY KEY (`emp_id`),
-  CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -357,7 +357,7 @@ CREATE TABLE `employee_phone_no` (
   `emp_id` int NOT NULL,
   `phone_no` varchar(16) NOT NULL,
   PRIMARY KEY (`emp_id`,`phone_no`),
-  CONSTRAINT `employee_phone_no_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `employee_phone_no_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,8 +413,8 @@ CREATE TABLE `gets` (
   PRIMARY KEY (`patient_id`,`date_of_admittance`,`room_no`,`prescription`,`date`),
   KEY `room_no` (`room_no`),
   KEY `patient_id` (`patient_id`,`date_of_admittance`,`date`,`prescription`),
-  CONSTRAINT `gets_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
-  CONSTRAINT `gets_ibfk_2` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`)
+  CONSTRAINT `gets_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gets_ibfk_2` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -441,7 +441,7 @@ CREATE TABLE `guardian` (
   `guardian_name` varchar(32) NOT NULL,
   `phone_no` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`patient_id`,`date_of_admittance`,`guardian_name`),
-  CONSTRAINT `guardian_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `guardian_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -466,7 +466,7 @@ CREATE TABLE `nurse` (
   `emp_id` int NOT NULL,
   `position` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`emp_id`),
-  CONSTRAINT `nurse_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `nurse_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -551,7 +551,7 @@ CREATE TABLE `patient_phone_no` (
   `date_of_admittance` date NOT NULL,
   `phone_no` varchar(16) NOT NULL,
   PRIMARY KEY (`patient_id`,`date_of_admittance`,`phone_no`),
-  CONSTRAINT `patient_phone_no_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `patient_phone_no_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -584,10 +584,10 @@ CREATE TABLE `payment` (
   UNIQUE KEY `payment_id` (`payment_id`),
   KEY `room_no` (`room_no`),
   KEY `patient_id` (`patient_id`,`date_of_admittance`,`date`,`prescription`),
-  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`),
-  CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
-  CONSTRAINT `payment_ibfk_3` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`),
-  CONSTRAINT `payment_ibfk_4` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`)
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `payment_ibfk_3` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `payment_ibfk_4` FOREIGN KEY (`patient_id`, `date_of_admittance`, `date`, `prescription`) REFERENCES `treatment` (`patient_id`, `date_of_admittance`, `date`, `prescription`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -612,7 +612,7 @@ CREATE TABLE `receptionist` (
   `emp_id` int NOT NULL,
   `floor` int NOT NULL,
   PRIMARY KEY (`emp_id`),
-  CONSTRAINT `receptionist_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`)
+  CONSTRAINT `receptionist_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -665,8 +665,8 @@ CREATE TABLE `takes_care` (
   `date_of_admittance` date NOT NULL,
   PRIMARY KEY (`emp_id`,`patient_id`,`date_of_admittance`),
   KEY `patient_id` (`patient_id`,`date_of_admittance`),
-  CONSTRAINT `takes_care_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `nurse` (`emp_id`),
-  CONSTRAINT `takes_care_ibfk_2` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `takes_care_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `nurse` (`emp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `takes_care_ibfk_2` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -694,7 +694,7 @@ CREATE TABLE `treatment` (
   `prescription` varchar(512) NOT NULL,
   `cost` int NOT NULL,
   PRIMARY KEY (`patient_id`,`date_of_admittance`,`date`,`prescription`),
-  CONSTRAINT `treatment_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`),
+  CONSTRAINT `treatment_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `treatment_chk_1` CHECK ((`cost` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -721,7 +721,7 @@ CREATE TABLE `treats` (
   `date_of_admittance` date NOT NULL,
   `emp_id` int DEFAULT NULL,
   PRIMARY KEY (`patient_id`,`date_of_admittance`),
-  CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`)
+  CONSTRAINT `treats_ibfk_1` FOREIGN KEY (`patient_id`, `date_of_admittance`) REFERENCES `patient` (`patient_id`, `date_of_admittance`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -744,4 +744,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-30 23:12:19
+-- Dump completed on 2022-03-31 23:03:55
