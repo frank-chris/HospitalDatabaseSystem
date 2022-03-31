@@ -2,7 +2,7 @@
 A Flask web application for a hospital database system. 
 CS 432: Databases assignment, IIT Gandhinagar.
 
-## Files 📁
+# Files 📁
 
 * [`contributions.txt`](https://github.com/frank-chris/HospitalDatabaseSystem/blob/main/contributions.txt)    
 * [`hospitalDB.sql`](https://github.com/frank-chris/HospitalDatabaseSystem/blob/main/hospitalDB.sql)   
