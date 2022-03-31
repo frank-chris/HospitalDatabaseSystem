@@ -23,17 +23,9 @@
         <div class="flex items-stretch">
           <ul class="menu menu-horizontal">
             <li>
-              <a href="update" class="ghost-btn rounded-lg">Update</a>
+              <a href="/" class="ghost-btn rounded-lg">Home</a>
+              <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
             </li> 
-            <li>
-              <a href="insert" class="ghost-btn rounded-lg">Insert</a>
-            </li> 
-            <li>
-              <a href="delete" class="ghost-btn rounded-lg">Delete</a>
-            </li>
-            <li>
-              <a href="display" class="ghost-btn rounded-lg">Display</a>
-            </li>
           </ul>
         </div>
       </div> 
@@ -46,17 +38,10 @@
           </div> 
           <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
             <li>
-              <a href="update" >Update</a>
+              <a href="/" >Home</a>
+              <a href="pick_table" >Edit</a>
             </li> 
-            <li>
-              <a href="insert" >Insert</a>
-            </li> 
-            <li>
-              <a href="delete" >Delete</a>
-            </li>
-            <li>
-              <a href="display" >Display</a>
-            </li>
+            
           </ul>
         </div>
         <!-- <button class="btn btn-square btn-ghost">
@@ -78,7 +63,11 @@
         <h1 class="text-5xl font-bold">MySQL Exception</h1>
         <p class="pt-6 font-bold">{{ e }}</p>
         <p class="pt-3 pb-6">Also, please make sure text values are in quotes and that there are no spaces.</p>
-        <a href="commands" name="insert_commands" class="btn btn-primary mr-2" >Back to commands</a>
+        <a href="edit" name="edit" class="btn btn-primary mr-2 gap-2" >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+          </svg>
+          Back</a>
       </div>
     </div>
   </div>

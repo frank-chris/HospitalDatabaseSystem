@@ -23,17 +23,9 @@
         <div class="flex items-stretch">
           <ul class="menu menu-horizontal">
             <li>
-              <a href="update" class="ghost-btn rounded-lg">Update</a>
+              <a href="/" class="ghost-btn rounded-lg">Home</a>
+              <a href="pick_table" class="ghost-btn rounded-lg">Edit</a>
             </li> 
-            <li>
-              <a href="insert" class="ghost-btn rounded-lg">Insert</a>
-            </li> 
-            <li>
-              <a href="delete" class="ghost-btn rounded-lg">Delete</a>
-            </li>
-            <li>
-              <a href="display" class="ghost-btn rounded-lg">Display</a>
-            </li>
           </ul>
         </div>
       </div> 
@@ -46,17 +38,10 @@
           </div> 
           <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
             <li>
-              <a href="update" >Update</a>
+              <a href="/" >Home</a>
+              <a href="pick_table" >Edit</a>
             </li> 
-            <li>
-              <a href="insert" >Insert</a>
-            </li> 
-            <li>
-              <a href="delete" >Delete</a>
-            </li>
-            <li>
-              <a href="display" >Display</a>
-            </li>
+            
           </ul>
         </div>
         <!-- <button class="btn btn-square btn-ghost">
@@ -70,9 +55,34 @@
 
   <!-- hero -->
   <div class="min-h-screen bg-base-100 p-16 lg:p-32">
-    <h1 class="font-bold text-3xl pl-4"> Insertion</h1>
+    <div class="flex-col">
+      <div class="form-control">
+        <div class="flex-row gap-2 pl-4 pb-4 content-start">
+        <form method="post">
+          <a href="pick_table" name="pick_table" class="btn btn-primary mr-2 gap-2" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back
+          </a>
+          
+          
+          <button name="insert_form" class="btn btn-primary mr-2 gap-2" >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            Insert
+          </button>
+          
+          
+        </form>
+        </div>
+      </div>
+    </div>
+
     <div class="hero-content flex-col lg:flex-row-reverse gap-16">
-      <div class="flex-col w-2/3">
+      
+      <div class="flex-col w-full">
         <h1 class="font-bold text-xl p-2">{{ table_name }}</h1>
         <div class="card overflow-x-auto w-full overflow-y-auto max-h-96 shadow-xl">
           <table class="table w-full">
@@ -80,39 +90,34 @@
           </table>
         </div>
       </div>
-      <div class="card flex-shrink-0 w-full max-w-sm shadow-xl bg-base-100">
-        <form class="card-body" enctype="multipart/form-data" method="post">
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Table</span>
-            </label>
-            <input type="text" name="table" placeholder="Table to insert into" class="input input-bordered" required>
-          </div>
-          <div class="form-control mt-2">
-            <div class="flex-row gap-2">
-              <button name="insert_describe" class="btn btn-primary" >Describe Table</button>
-            </div>
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Columns</span>
-            </label>
-            <input type="text" name="columns" placeholder="Column names (comma separated)" class="input input-bordered">
-          </div>
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text">Values</span>
-            </label>
-            <input type="text" name="values" placeholder="Values (comma separated)" class="input input-bordered">
-          </div>
-          <div class="form-control mt-2">
-            <div class="flex-row gap-2">
-              <button name="insert_execute" class="btn btn-primary mr-2" >Execute</button>
-            </div>
-          </div>
-        </form>
-      </div>
+
     </div>
+
+      {% if operation=='insert' %}
+      <form class='card-body flex flex-col gap-4 bg-base-200 rounded-lg mx-4 shadow-xl' enctype='multipart/form-data' method='post'>
+        <h1 class="font-bold text-xl p-2">Insertion</h1>
+        <div class='flex flex-row overflow-x-auto gap-2'>
+          {{ form_html|safe }}
+        </div>
+
+        <div class='flex flex-row'>
+          <button name="insert_execute" class="btn btn-primary mr-2" >Insert</button>
+        </div>
+      </form>
+      {% endif %}
+
+      {% if operation=='update' %}
+      <form class='card-body flex flex-col gap-4 bg-base-200 rounded-lg mx-4 shadow-xl' enctype='multipart/form-data' method='post'>
+        <h1 class="font-bold text-xl p-2">Updation</h1>
+        <div class='flex flex-row overflow-x-auto gap-2'>
+          {{ form_html|safe }}
+        </div>
+
+        <div class='flex flex-row'>
+          <button name="update_execute" class="btn btn-primary mr-2" >Update</button>
+        </div>
+      </form>
+      {% endif %}
   </div>
 
   <!-- footer -->
