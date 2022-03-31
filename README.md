@@ -57,8 +57,32 @@ python3 web_app.py
 ## Home Page
 ![](images/homepage.png)
 
-## Pick Table
-![](images/pick_table.png)
+## List of all Tables
+![](images/list_of_tables.png)
+
+## Describe Table
+![](images/describe_table.png)
+
+## View Table
+![](images/view_table.png)
+
+## Insert Entry
+![](images/insert_table.png)
+
+## Insert Successful
+![](images/insert_successful.png)
+
+## Update Entry
+![](images/update_table.png)
+
+## Update Successful
+![](images/update_successful.png)
+
+## Delete Entry
+![](images/delete.png)
+
+## Delete Successful
+![](images/delete_successful.png)
 
 # Contributors ✏️
 
