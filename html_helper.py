@@ -1,5 +1,12 @@
-
 def nested_list_to_html_table(table:list, buttons:bool = False):
+    '''
+    Helper function to convert a list of lists into an html table
+    table: list of lists to be converted into an html table
+    button: boolean variable denoting whether there are buttons
+
+    Return
+    html_string: The corresponding table in html format as a string
+    '''
     columns = table[0]
     html_string = '<thead><tr><th></th>'
 
@@ -35,6 +42,13 @@ def nested_list_to_html_table(table:list, buttons:bool = False):
     
 
 def nested_list_to_html_select(nested_list:list):
+    '''
+    Helper function to convert a list of lists into an html select tag
+    nested_list: list of lists to be converted into an html select tag
+
+    Return
+    select_string: The corresponding select tag in html format as a string
+    '''
     select_string = "<option disabled selected>Pick a table</option>" 
     
     for sub_list in nested_list[1:]:
@@ -44,6 +58,13 @@ def nested_list_to_html_select(nested_list:list):
     return select_string
 
 def get_insert_form(columns:list):
+    '''
+    Create an insert form string out of column names
+    columns: list containing the column names
+
+    Return
+    form_string: String containing the insert form
+    '''
     form_string = ""
 
     for col_name in columns:
@@ -52,6 +73,13 @@ def get_insert_form(columns:list):
     return form_string
 
 def get_update_form(columns:list, values:list):
+    '''
+    Create an update form string out of column names
+    columns: list containing the column names
+
+    Return
+    form_string: String containing the update form
+    '''
     form_string = ""
 
     for col, val in zip(columns, values):
