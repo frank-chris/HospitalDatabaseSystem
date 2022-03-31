@@ -125,13 +125,13 @@ def delete_from_table(mysql, tablename, where_condition):
     res2 = select_with_headers(mysql, tablename) # after the operation
     return res1, res2
 
-def update_table(mysql, tablename, column, val,  where_condition):
+def update_table(mysql, tablename, set_statement,  where_condition):
     '''
     where_condition: entire where condition, including ANDs and ORs, as a string
     '''
     res1 = select_with_headers(mysql, tablename) # before the operation
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("UPDATE " + tablename +" SET " + column + " = " + val + " WHERE " + where_condition)
+    cursor.execute("UPDATE " + tablename +" SET " + set_statement + " WHERE " + where_condition)
     mysql.connection.commit()
     cursor.fetchall()
     res2 = select_with_headers(mysql, tablename) # after the operation
