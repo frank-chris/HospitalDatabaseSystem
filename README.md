@@ -57,7 +57,7 @@ python3 web_app.py
 ## Home Page
 ![](images/homepage.png)
 
-## List of all Tables
+## Pick Table
 ![](images/list_of_tables.png)
 
 ## Describe Table
