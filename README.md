@@ -87,7 +87,6 @@ python3 web_app.py
 ## Delete Successful
 ![](images/delete_successful.png)
 
-
 # Contributors ✏️
 
 ### TEAM G1
